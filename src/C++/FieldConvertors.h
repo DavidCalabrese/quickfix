@@ -502,7 +502,7 @@ struct UtcTimeStampConvertor
   throw( FieldConvertError )
   {
     size_t len = value.size();
-    if (len < 17 or len > 27) throw FieldConvertError(value);
+    if (len < 17 || len > 27) throw FieldConvertError(value);
 
     int i = 0;
     int c = 0;
@@ -635,7 +635,7 @@ struct UtcTimeOnlyConvertor
   throw( FieldConvertError )
   {
     size_t len = value.size();
-    if (len < 8 or len > 18) throw FieldConvertError(value);
+    if (len < 8 || len > 18) throw FieldConvertError(value);
 
     int i = 0;
     int c = 0;
