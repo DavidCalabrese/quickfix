@@ -37,6 +37,9 @@ namespace FIX
     virtual ~Responder() {}
     virtual bool send( const std::string& ) = 0;
     virtual void disconnect() = 0;
+
+    // SSNC Extension: Expose getSocket() so we can obtain source IP address
+    virtual int getSocket() const {return(-1);} // SSNC Extension
   };
 }
 

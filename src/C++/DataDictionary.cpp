@@ -162,6 +162,8 @@ throw( FIX::Exception )
   }
 }
 
+bool DataDictionary::m_SSNC_doValidations = false;
+
 void DataDictionary::iterate( const FieldMap& map, const MsgType& msgType ) const
 {
   int lastField = 0;
@@ -176,11 +178,12 @@ void DataDictionary::iterate( const FieldMap& map, const MsgType& msgType ) cons
 
     if ( m_hasVersion )
     {
-      checkValidFormat( field );
+      if (m_SSNC_doValidations)		// SSNC Extension
+        checkValidFormat( field );
       checkValue( field );
     }
 
-    if ( m_beginString.getValue().length() && shouldCheckTag(field) )
+    if ( m_SSNC_doValidations && m_beginString.getValue().length() && shouldCheckTag(field) ) // SSNC Extension
     {
       checkValidTagNumber( field );
       if ( !Message::isHeaderField( field, this )

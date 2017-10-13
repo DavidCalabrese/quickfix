@@ -316,6 +316,14 @@ public:
 
   DataDictionary& operator=( const DataDictionary& rhs );
 
+  // SSNC Extension to disable validations
+  //    checkValidFormat    - allow any datatypes (int, char)
+  //    checkValidTagNumber - Allow any FIX tag
+  //    checkIsInMessage    - Allow any FIX tag for all messages
+  //    checkGroupCount     - Allow group count mismatches to pass thru
+  static void SSNCDoFIXValidations(bool state)
+  { m_SSNC_doValidations = state; }
+
 private:
   /// Iterate through fields while applying checks.
   void iterate( const FieldMap& map, const MsgType& msgType ) const;
@@ -539,6 +547,9 @@ private:
   ValueToName m_valueNames;
   FieldToGroup m_groups;
   MsgFields m_dataFields;
+
+  // SSNC Extension to disable validations
+  static bool m_SSNC_doValidations;
 };
 }
 
