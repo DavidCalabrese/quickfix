@@ -68,10 +68,10 @@ struct DateTime
   static const int64_t  SECONDS_PER_MIN = 60;
   static const int64_t  MINUTES_PER_HOUR = 60;
 
-  static const int64_t  NANOS_PER_DAY = 86400000000000;
-  static const int64_t  NANOS_PER_HOUR = 3600000000000;
-  static const int64_t  NANOS_PER_MIN = 60000000000;
-  static const int64_t  NANOS_PER_SEC = 1000000000;
+  static const int64_t  NANOS_PER_DAY = 86400000000000LL;
+  static const int64_t  NANOS_PER_HOUR = 3600000000000LL;
+  static const int64_t  NANOS_PER_MIN = 60000000000LL;
+  static const int64_t  NANOS_PER_SEC = 1000000000LL;
 
   // time_t epoch (1970-01-01) as a Julian date
   static const int64_t  JULIAN_19700101 = 2440588;
