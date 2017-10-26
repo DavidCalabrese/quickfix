@@ -504,7 +504,7 @@ struct UtcTimeStampConvertor
     size_t len = value.size();
     if (len < 17 || len > 27) throw FieldConvertError(value);
 
-    int i = 0;
+    size_t i = 0;
     int c = 0;
     for( c = 0; c < 8; ++c )
       if( !IS_DIGIT(value[i++]) ) throw FieldConvertError(value);
@@ -637,7 +637,7 @@ struct UtcTimeOnlyConvertor
     size_t len = value.size();
     if (len < 8 || len > 18) throw FieldConvertError(value);
 
-    int i = 0;
+    size_t i = 0;
     int c = 0;
     for( c = 0; c < 2; ++c )
       if( !IS_DIGIT(value[i++]) ) throw FieldConvertError(value);
