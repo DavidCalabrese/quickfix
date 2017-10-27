@@ -474,27 +474,27 @@ struct UtcTimeStampConvertor
     value.getYMD( year, month, day );
     value.getHMS( hour, minute, second, fraction, precision );
 
-    integer_to_string_padded( result, 5, year, 4 );
-    integer_to_string_padded( result + 4, 3, month, 2 );
-    integer_to_string_padded( result + 6, 3, day, 2 );
+    integer_to_string_padded( result, 4, year );
+    integer_to_string_padded( result + 4, 2, month );
+    integer_to_string_padded( result + 6, 2, day );
     result[8]  = '-';
-    integer_to_string_padded( result + 9, 3, hour, 2 );
+    integer_to_string_padded( result + 9, 2, hour );
     result[11] = ':';
-    integer_to_string_padded( result + 12, 3, minute, 2 );
+    integer_to_string_padded( result + 12, 2, minute );
     result[14] = ':';
-    integer_to_string_padded( result + 15, 3, second, 2 );
+    integer_to_string_padded( result + 15, 2, second );
 
     if( precision )
     {
       result[17] = '.';
-      if( integer_to_string_padded ( result + 18, precision + 1, fraction, precision )
+      if( integer_to_string_padded ( result + 18, precision, fraction )
           != result + 18 )
       {
         throw FieldConvertError();
       }
     }
 
-    return result;
+    return std::string( result, precision ? 17+1+precision : 17 );
   }
 
   static UtcTimeStamp convert( const std::string& value,
@@ -614,21 +614,21 @@ struct UtcTimeOnlyConvertor
 
     value.getHMS( hour, minute, second, fraction, precision );
 
-    integer_to_string_padded ( result, 3, hour, 2 );
+    integer_to_string_padded ( result, 2, hour );
     result[2] = ':';
-    integer_to_string_padded ( result + 3, 3, minute,  2 );
+    integer_to_string_padded ( result + 3, 2, minute );
     result[5] = ':';
-    integer_to_string_padded ( result + 6, 3, second,  2 );
+    integer_to_string_padded ( result + 6, 2, second );
 
     if( precision )
     {
       result[8] = '.';
-      if( integer_to_string_padded ( result + 9, precision + 1, fraction, precision )
+      if( integer_to_string_padded ( result + 9, precision, fraction )
           != result + 9 )
           throw FieldConvertError();
     }
 
-    return result;
+    return std::string( result, precision ? 8+1+precision : 8 );
   }
 
   static UtcTimeOnly convert( const std::string& value)
