@@ -265,4 +265,10 @@ void ThreadedSocketInitiator::getHost( const SessionID& s, const Dictionary& d,
   m_sessionToHostNum[ s ] = ++num;
 }
 
+// SSNC Extension: DevRequest #15720 - Add ability to reset Host# for round-robin BackupHost initiators
+void ThreadedSocketInitiator::setNextHost( const SessionID& s, int num)
+{
+  m_sessionToHostNum[ s ] = num;
+}
+
 }
