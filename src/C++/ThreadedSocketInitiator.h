@@ -47,6 +47,9 @@ public:
 
   virtual ~ThreadedSocketInitiator();
 
+  // SSNC Extension: DevRequest #15720 - Add ability to reset Host# for round-robin BackupHost initiators
+  void setNextHost( const SessionID& s, int num);
+
 private:
   typedef std::map < int, thread_id > SocketToThread;
   typedef std::map < SessionID, int > SessionToHostNum;
