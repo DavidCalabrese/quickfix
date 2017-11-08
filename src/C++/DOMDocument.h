@@ -67,6 +67,9 @@ namespace FIX
     virtual bool xml( std::ostream& ) = 0;
 
     virtual std::auto_ptr<DOMNode> getNode( const std::string& ) = 0;
+
+    // SSNC Extension - Cache component nodes by the name attribute.  Improves FIX.5.0SP2_EPxxx DataDictionary .xml loading/parsing by 90%
+    virtual void cacheNodesByXPathwithAttr(const std::string& XPathRoot, const std::string& attr) = 0;
   };
   typedef std::auto_ptr<DOMDocument> DOMDocumentPtr;
 }
