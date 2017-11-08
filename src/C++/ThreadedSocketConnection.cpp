@@ -95,6 +95,10 @@ bool ThreadedSocketConnection::read()
 
   try
   {
+    // SSNC Extension: fix for socket reuse bug - Messages get read & processed on wrong thread
+    if (m_disconnect)     // SSNC Extension
+        return(false);    // SSNC Extension
+
     // Wait for input (1 second timeout)
     int result = select( 1 + m_socket, &readset, 0, 0, &timeout );
 
