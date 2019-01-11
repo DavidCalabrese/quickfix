@@ -38,7 +38,7 @@
 namespace FIX
 {
 // SSNC Extension: Version check and change management
-int get_SSNC_build() { return 20180817; }    // SSNC Extension
+int get_SSNC_build() { return 20190109; }    // SSNC Extension
 
 void string_replace( const std::string& oldValue,
                      const std::string& newValue,

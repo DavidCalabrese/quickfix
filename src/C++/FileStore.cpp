@@ -129,10 +129,10 @@ void FileStore::populateCache()
   if ( headerFile )
   {
     int num;
-    long offset;
+    long long int offset;
     size_t size;
 
-    while ( FILE_FSCANF( headerFile, "%d,%ld,%lu ", &num, &offset, &size ) == 3 )
+    while ( FILE_FSCANF( headerFile, "%d,%lld,%lu ", &num, &offset, &size ) == 3 )
       m_offsets[ num ] = std::make_pair( offset, size );
     fclose( headerFile );
   }
@@ -189,12 +189,12 @@ throw ( IOException )
   if ( fseek( m_headerFile, 0, SEEK_END ) ) 
     throw IOException( "Cannot seek to end of " + m_headerFileName );
 
-  long offset = ftell( m_msgFile );
+  long long int offset = ftello( m_msgFile );
   if ( offset < 0 ) 
     throw IOException( "Unable to get file pointer position from " + m_msgFileName );
   size_t size = msg.size();
 
-  if ( fprintf( m_headerFile, "%d,%ld,%lu ", msgSeqNum, offset, size ) < 0 )
+  if ( fprintf( m_headerFile, "%d,%lld,%lu ", msgSeqNum, offset, size ) < 0 )
     throw IOException( "Unable to write to file " + m_headerFileName );
   m_offsets[ msgSeqNum ] = std::make_pair( offset, size );
   fwrite( msg.c_str(), sizeof( char ), msg.size(), m_msgFile );
@@ -314,7 +314,7 @@ throw ( IOException )
   NumToOffset::const_iterator find = m_offsets.find( msgSeqNum );
   if ( find == m_offsets.end() ) return false;
   const OffsetSize& offset = find->second;
-  if ( fseek( m_msgFile, offset.first, SEEK_SET ) ) 
+  if ( fseeko( m_msgFile, (off_t)offset.first, SEEK_SET ) ) 
     throw IOException( "Unable to seek in file " + m_msgFileName );
   char* buffer = new char[ offset.second + 1 ];
   size_t result = fread( buffer, sizeof( char ), offset.second, m_msgFile );
