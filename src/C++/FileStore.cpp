@@ -264,6 +264,7 @@ void FileStore::reset() throw ( IOException )
   try
   {
     m_cache.reset();
+    m_offsets.clear();
     open( true );
     setSession();
   }
@@ -278,6 +279,7 @@ void FileStore::refresh() throw ( IOException )
   try
   {
     m_cache.reset();
+    m_offsets.clear();
     open( false );
   }
   catch( std::exception& e )
