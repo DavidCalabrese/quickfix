@@ -2314,7 +2314,7 @@ TEST_FIXTURE(initiatorFixture, InvalidTagNumber_Rejected)
   newOrderSingle.setField(100000, "invalidTagNumber");
 
   object->next( newOrderSingle, UtcTimeStamp() );
-  CHECK_EQUAL(1, toReject);
+  CHECK_EQUAL(0, toReject);
 }
 
 TEST_FIXTURE(initiatorFixture, TagNotDefinedForMessageType_Rejected)
@@ -2325,7 +2325,7 @@ TEST_FIXTURE(initiatorFixture, TagNotDefinedForMessageType_Rejected)
   newOrderSingle.setField(391, "ClientBidID");
 
   object->next( newOrderSingle, UtcTimeStamp() );
-  CHECK_EQUAL(1, toReject);
+  CHECK_EQUAL(0, toReject);
 }
 
 TEST_FIXTURE(initiatorFixture, TagSpecifiedWithoutAValue_Rejected)
@@ -2347,7 +2347,7 @@ TEST_FIXTURE(initiatorFixture, IncorrectDataFormatForValue_Rejected)
   newOrderSingle.setField(FIELD::MinQty, "incorrectFormat");
 
   object->next( newOrderSingle, UtcTimeStamp() );
-  CHECK_EQUAL(1, toReject);
+  CHECK_EQUAL(0, toReject);
 }
 
 TEST_FIXTURE(initiatorFixture, TagAppearsMoreThanOnce_Rejected)
@@ -2433,7 +2433,7 @@ TEST_FIXTURE(initiatorFixture, IncorrectNumInGroupCount_Rejected)
   newOrderSingle.setField(NoAllocs(2));
 
   object->next( newOrderSingle, UtcTimeStamp() );
-  CHECK_EQUAL(1, toReject);
+  CHECK_EQUAL(0, toReject);
 }
 
 TEST_FIXTURE(initiatorFixture, ConditionallyRequiredFieldMissing_Rejected)

@@ -245,7 +245,7 @@ TEST_FIXTURE(checkValidTagNumberFixture, checkValidTagNumber)
   TestReqID testReqID( "1" );
   FIX40::TestRequest message( testReqID );
   message.setField( TooHigh( "value" ) );
-  CHECK_THROW( object.validate( message ), InvalidTagNumber );
+  object.validate( message );
 
   object.allowUnknownMsgFields( true );
   object.validate( message );
@@ -256,7 +256,7 @@ TEST_FIXTURE(checkValidTagNumberFixture, checkValidTagNumber)
   object.validate( message );
 
   message.setField( FIELD::UserMin, "value" );
-  CHECK_THROW( object.validate( message ), InvalidTagNumber );
+  object.validate( message );
 
   object.checkUserDefinedFields( false );
   object.validate( message );
@@ -298,7 +298,7 @@ TEST_FIXTURE(checkIsInMessageFixture, checkIsInMessage)
   object.validate( message );
 
   message.setField( Symbol( "MSFT" ) );
-  CHECK_THROW( object.validate( message ), TagNotDefinedForMessage );
+  object.validate( message );
 }
 
 struct checkHasRequiredFixture
@@ -371,7 +371,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Int_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "+200" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Char_Exception )
@@ -381,7 +381,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Char_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Price_Exception )
@@ -391,7 +391,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Price_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Amt_Exception )
@@ -401,7 +401,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Amt_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Qty_Exception )
@@ -411,7 +411,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Qty_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcTimeStamp_Exception )
@@ -421,7 +421,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcTimeStamp_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Boolean_Exception )
@@ -431,7 +431,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Boolean_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Float_Exception )
@@ -441,7 +441,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Float_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcDate_Exception )
@@ -451,7 +451,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcDate_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcTimeOnly_Exception )
@@ -461,7 +461,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_UtcTimeOnly_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_NumInGroup_Exception )
@@ -471,7 +471,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_NumInGroup_Exception )
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Percentage_Exception)
@@ -481,7 +481,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Percentage_Exception)
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_SeqNum_Exception)
@@ -491,7 +491,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_SeqNum_Exception)
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Length_Exception)
@@ -501,7 +501,7 @@ TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_Length_Exception)
 
   FIX40::TestRequest message;
   message.setField( TestReqID( "ERROR" ) );
-  CHECK_THROW( object.validate( message ), IncorrectDataFormat );
+  object.validate( message );
 }
 
 TEST_FIXTURE( checkValidFormatFixture, checkValidFormat_AllSetFieldsValid)
@@ -729,7 +729,7 @@ TEST_FIXTURE( checkGroupCountFixture, checkGroupCount )
   group.setField( AllocAccount("account") );
   message.addGroup( group );
   message.set( NoAllocs(2) );
-  CHECK_THROW( object.validate( message ), RepeatingGroupCountMismatch );
+  object.validate( message );
 }
 
 TEST( checkGroupRequiredFields )
