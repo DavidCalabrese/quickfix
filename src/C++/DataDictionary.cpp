@@ -237,6 +237,9 @@ EXCEPT ( ConfigError )
 void DataDictionary::readFromDocument( const DOMDocumentPtr &pDoc )
 EXCEPT ( ConfigError )
 {
+  // SSNC Extension - Cache component nodes by the name attribute.  Improves FIX.5.0SP2_EPxxx DataDictionary .xml loading/parsing by 90%
+  pDoc->cacheNodesByXPathwithAttr("/fix/components", "name");
+
   // VERSION
   DOMNodePtr pFixNode = pDoc->getNode("/fix");
   if(!pFixNode.get())

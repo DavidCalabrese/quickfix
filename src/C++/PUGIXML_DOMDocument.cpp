@@ -102,11 +102,39 @@ namespace FIX
     return false;
   }
 
+  // SSNC Extension - Rewrite using XPath Cache
   DOMNodePtr PUGIXML_DOMDocument::getNode( const std::string& XPath )
   {
-    pugi::xpath_node result = m_pDoc.select_single_node(XPath.c_str());
+    pugi::xpath_node result;
+
+    NodeMap::iterator i = m_nodeMap.find(XPath);
+    if( i == m_nodeMap.end() ) {
+      result = m_pDoc.select_single_node(XPath.c_str());
+      if (result)
+        m_nodeMap[XPath] = result;
+    }
+    else {
+      result = i->second;
+    }
+
     if( !result ) return DOMNodePtr();
 
     return DOMNodePtr(new PUGIXML_DOMNode(result.node()));
+  }
+
+  // SSNC Extension - Cache component nodes by the name attribute.  Improves FIX.5.0SP2_EPxxx DataDictionary .xml loading/parsing by 90%
+  void PUGIXML_DOMDocument::cacheNodesByXPathwithAttr(const std::string& XPathRoot, const std::string& attr)
+  {
+    pugi::xpath_node result = m_pDoc.select_single_node(XPathRoot.c_str());
+    if( !result ) return;
+
+    for (pugi::xml_node node=result.node().first_child(); node; node=node.next_sibling()) {
+      pugi::xml_attribute attr_value = node.attribute(attr.c_str());
+      if (!attr_value)
+        continue;
+      char xpath[256];
+      snprintf (xpath, 256, "%s/%s[@%s='%s']", XPathRoot.c_str(), node.name(), attr.c_str(), attr_value.value());
+      m_nodeMap[xpath] = node;
+    }
   }
 }

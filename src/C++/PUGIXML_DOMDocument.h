@@ -63,6 +63,9 @@ namespace FIX
   /// XML document as represented by pugixml.
   class PUGIXML_DOMDocument : public DOMDocument
   {
+
+  typedef std::map < std::string, pugi::xpath_node > NodeMap;
+
   public:
     PUGIXML_DOMDocument() EXCEPT ( ConfigError );
     ~PUGIXML_DOMDocument();
@@ -73,8 +76,12 @@ namespace FIX
 
     DOMNodePtr getNode( const std::string& );
 
+    // SSNC Extension - Cache component nodes by the name attribute.  Improves FIX.5.0SP2_EPxxx DataDictionary .xml loading/parsing by 90%
+    void cacheNodesByXPathwithAttr(const std::string& XPathRoot, const std::string& attr);
+
   private:
     pugi::xml_document m_pDoc;
+    NodeMap   m_nodeMap;
   };
 }
 
