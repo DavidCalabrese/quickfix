@@ -44,7 +44,7 @@ AX_JAVA()
 
 AC_CANONICAL_HOST
 
-build_no_unit_test = no
+build_no_unit_test=no
 
 # Detect the target system
 case "${host_os}" in
