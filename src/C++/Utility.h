@@ -145,6 +145,9 @@ typedef int socket_handle;
 
 namespace FIX
 {
+// SSNC Extension: Version check and change management
+int get_SSNC_build();    // SSNC Extension
+
 void string_replace( const std::string& oldValue,
                      const std::string& newValue,
                      std::string& value );

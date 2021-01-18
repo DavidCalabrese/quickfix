@@ -227,6 +227,9 @@ public:
   Log* getLog() { return &m_state; }
   const MessageStore* getStore() { return &m_state; }
 
+  // SSNC Extension: Expose getSocket() so we can obtain source IP address
+  int getSocket() const { if (m_pResponder) return (m_pResponder->getSocket()); else return(-1); } // SSNC Extension
+
 private:
   typedef std::map < SessionID, Session* > Sessions;
   typedef std::set < SessionID > SessionIDs;
